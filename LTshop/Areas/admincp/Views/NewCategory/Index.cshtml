@@ -1,0 +1,37 @@
+﻿@model IEnumerable<BTH4.Models.loaitin>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/admincp/Views/Shared/_LayoutAdministracao.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Thêm mới", "Create",new { },new {@Class="btn btn-primary" })
+</p>
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.tenloai)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tenloai)
+                </td>
+                <td>
+                    @Html.ActionLink(" ", "Edit", new { id = item.maloaitin }, new { @Class = "btn btn-success ace-icon fa fa-pencil-square-o" })
+                    @Html.ActionLink(" ", "Details", new { id = item.maloaitin }, new { @Class = "btn btn-info ace-icon fa fa-eye" })
+                    @Html.ActionLink(" ", "Delete", new { id = item.maloaitin }, new { @Class = "btn btn-danger ace-icon fa fa-trash" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

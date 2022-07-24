@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ec657a1e57334754b94f5880de41cd3f" Name="Diagram1">
+        <EntityTypeShape EntityType="QLBHModel.chitiethoadonban" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBHModel.chitiethoadonnhap" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBHModel.hoadonban" Width="1.5" PointX="3" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBHModel.hoadonnhap" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBHModel.khachhang" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBHModel.loaisp" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBHModel.nhacungcap" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBHModel.nhanvien" Width="1.5" PointX="0.75" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBHModel.sanpham" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBHModel.sysdiagram" Width="1.5" PointX="5.75" PointY="7" IsExpanded="true" />
+        <AssociationConnector Association="QLBHModel.FK_chitiethoadonban_hoadonban" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBHModel.FK_chitiethoadonban_sanpham" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBHModel.FK_chitiethoadonnhap_hoadonnhap" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBHModel.FK_chitiethoadonnhap_sanpham" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBHModel.FK_hoadonban_khachhang" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBHModel.FK_hoadonban_nhanvien" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBHModel.FK_hoadonnhap_nhacungcap" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBHModel.FK_sanpham_loaisp" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="QLBHModel.user" Width="1.5" PointX="0.75" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

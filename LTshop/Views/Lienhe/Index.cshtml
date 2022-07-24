@@ -1,0 +1,133 @@
+﻿
+@{
+    ViewBag.Title = "CheckOut";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript" src="~/Scripts/angularScript/checkout.js"></script>
+<!-- Begin Hiraola's Breadcrumb Area -->
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <h2>Liên hệ</h2>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="active">Liên hệ</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Hiraola's Breadcrumb Area End Here -->
+<!-- Begin Hiraola's Checkout Area -->
+<div ng-controller="CheckOutCtrl" class="checkout-area">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="coupon-accordion">
+                    <h3 style="font-size:larger">
+                        Bất cứ nơi đâu & bất cứ khi nào bạn cần chúng tôi. Chúng tôi ở đây vì bạn – hãy liên hệ với chúng tôi nếu bạn cần hỗ trợ.
+                        Có thể là kỹ thuật, truy vấn chung hoặc hỗ trợ thông tin.
+                    </h3>
+                    </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-12">
+                <form action="javascript:void(0)">
+                    <div class="checkbox-form">
+                        <h3>Liên hệ với chúng tôi</h3>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="checkout-form-list">
+                                    <label>Họ tên <span class="required">*</span></label>
+                                    <input placeholder="Họ tên..." type="text" id="tenkh">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="checkout-form-list">
+                                    <label>Địa chỉ</label>
+                                    <input placeholder="Địa chỉ của bạn..." type="text" id="diachi">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="checkout-form-list">
+                                    <label>SĐT<span class="required">*</span></label>
+                                    <input placeholder="SĐT của bạn..." type="text" id="sdt">
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="checkout-form-list">
+                                    <label>Email</label>
+                                    <input placeholder="Email của bạn..." type="text" id="email">
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="checkout-form-list">
+                                    <label>Ghi chú<span class="required">*</span></label>
+                                    <br />
+                                    <textarea id="ghichu" cols="64" rows="3" placeholder="Viết ghi chú tại đây"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="order-button-payment" style="margin-left:200px">
+                                <input value="Gửi yêu cầu" type="button" >
+                            </div>
+                        </div>
+
+
+                    </div>
+                </form>
+            </div>
+
+
+
+            <div class="col-lg-6 col-12">
+                <h1>Thông tin liên hệ</h1>
+                <p>Cửa Hàng LT Shop Tân Châu Khoái Châu Hưng Yên</p>
+                <br />
+                <br />
+                <br />
+                <h3>Góp ý, khiếu nại</h3>
+
+                <div class="widgets-essential_stuff">
+                    <ul style="margin-left:20px">
+
+                        <li class="hiraola-phone">
+                            <i class="ion-ios-telephone"></i><span>Phone:</span> <a href="tel://+84379517036">+84 379 517 036</a>
+                        </li>
+                        <li class="hiraola-email"><i class="ion-android-mail"></i><span>Email:</span> <a href="mailto://levantruong2701@gmail.com">levantruong2701@gmail.com</a></li>
+                    </ul>
+                </div>
+
+                <div class="hiraola-social_link">
+                    <ul style="margin-left:20px" >
+                        <li class="facebook">
+                            <a href="https://www.facebook.com/" data-toggle="tooltip" target="_blank" title="Facebook">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                        </li>
+                        <li class="twitter">
+                            <a href="https://twitter.com/" data-toggle="tooltip" target="_blank" title="Twitter">
+                                <i class="fab fa-twitter-square"></i>
+                            </a>
+                        </li>
+                        <li class="google-plus">
+                            <a href="https://www.plus.google.com/discover" data-toggle="tooltip" target="_blank" title="Google Plus">
+                                <i class="fab fa-google-plus"></i>
+                            </a>
+                        </li>
+                        <li class="instagram">
+                            <a href="https://rss.com/" data-toggle="tooltip" target="_blank" title="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Hiraola's Checkout Area End Here -->

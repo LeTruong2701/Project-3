@@ -1,0 +1,165 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/admincp/Views/Shared/_LayoutAdministracao.cshtml";
+}
+
+<div ng-app="myapp">
+    <h2>Quản lý sản phẩm</h2>
+
+    <div ng-controller="QLSanphamCtrl">
+        <br />
+        <div style="display:flex">
+            <button class="btn btn-primary fa fa-plus" data-toggle="modal" data-target="#exampleModal">Create new</button>
+            <div style="margin-left:800px;font-size:medium">
+                Tìm kiếm:   <input type="text" ng-model="searchText" />
+            </div>
+        </div>
+        <br />
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Sản phẩm</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form novalidate name="frmSanpham" id="frmSanpham" class="form-horizontal row-border">
+                        <div class="modal-body">
+                            <div class="col-md-12">
+                                @*<div class="form-group">
+                                    <label class="col-md-4 control-label" for="input17"> Mã Sản phẩm</label>
+                                    <div class="col-md-7"> <input type="text" id="idmasp" class="form-control" name="namemasp" ng-model="masp" /> </div>
+                                </div>*@
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="input17"> Tên Sản phẩm</label>
+                                    <div class="col-md-7"> <input type="text" id="idtensp" class="form-control" name="nametensp" ng-model="tensp" /> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="input17"> Mã loại</label>
+                                    <div class="col-md-7">
+                                        @*<input type="text" id="idmaloaisp" class="form-control" name="namemaloaisp" ng-model="maloaisp" />*@
+                                        <select class="custom-select" ng-model="maloaisp">
+                                            <option ng-repeat="item in categories" value="{{item.maloaisp}}">{{item.tenloaisp}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="input17"> Gía</label>
+                                    <div class="col-md-7"> <input type="text" id="idgiaban" class="form-control" name="namegiaban" ng-model="giaban" /> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="input17"> Size</label>
+                                    <div class="col-md-7"> <input type="text" id="idsize" class="form-control" name="namesize" ng-model="size" /> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="input17"> Đặc điểm</label>
+                                    <div class="col-md-7">
+                                        <textarea id="iddacdiem" class="form-control" name="namedacdiem" rows="3" cols="30" ng-model="dacdiem"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div style="height:100px;width:100px;margin-left:300px">
+                                        <img style="height:100px;width:100px" class="w-100" ng-src="{{anh}}" />
+
+                                    </div>
+                                    <label class="col-md-4 control-label" for="input17"> Ảnh</label>
+                                    <div class="col-md-7"> <input type="text" id="idanh" class="form-control" name="nameanh" ng-model="anh" /> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="input17"> Created_at</label>
+                                    <div class="col-md-7"> <input type="date" id="idcreated_at" class="form-control" name="namecreated_at" ng-model="created_at" /> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="input17"> Updated_at</label>
+                                    <div class="col-md-7"> <input type="date" id="idupdated_at" class="form-control" name="nameupdated_at" ng-model="updated_at" /> </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-4"> </div>
+                                    <div class="col-md-7">
+                                        <span id="save" class="btn btn-success margin-right-btn" ng-click="SaveUpdate()">
+                                            <i class="icon-save"></i> {{btnText}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+        <table class="table table-bordered  table-striped">
+            <thead class="grid-top-panel">
+                <tr>
+                    <th style="display:none">Mã Sản phẩm</th>
+                    <th>Tên SP</th>
+                    <th>Mã loại</th>
+                    <th>Giá bán</th>
+
+                    <th style="text-align:center">Đặc điểm</th>
+                    <th style="text-align:center">Ảnh</th>
+                    <th>created_at</th>
+                    <th>updated_at</th>
+                    <th>Tác vụ</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="dataModel in sanphams  | orderBy:sortColumn:reverse | filter: searchText ">
+                    <td style="display:none">{{dataModel.masp}}</td>
+                    <td> {{dataModel.tensp}}</td>
+                    <td> {{dataModel.maloaisp}}</td>
+                    <td> {{dataModel.giaban | currency:"":0}}</td>
+
+                    <td> {{dataModel.dacdiem}}</td>
+                    <td>
+                        <div style="width: 100px; height: 100px">
+                            <img style="width: 100%; height:100%" src="{{dataModel.anh}}" />
+
+                        </div>
+                    </td>
+                    <td>{{dateObj(dataModel.created_at)| date: 'dd/MM/yyyy'}}</td>
+                    <td>{{dateObj(dataModel.updated_at)| date: 'dd/MM/yyyy'}}</td>
+                    <td style="text-align:right; color:white">
+                        <span>
+                            <span id="save" class="btn btn-primary margin-right-btn" ng-click="GetSanphamByID(dataModel)" data-toggle="modal" data-target="#exampleModal">
+
+                                Edit
+                            </span>
+                        </span>
+                    </td>
+                    <td style="text-align:right; color:white">
+                        <span>
+                            <span id="save" class="btn btn-danger margin-right-btn" ng-click="DeleteSanpham(dataModel)">
+                                Delete
+                            </span>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot></tfoot>
+        </table>
+    </div>
+
+
+
+
+
+</div>
+
+@section PageInlineScripts
+{
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Areas/admincp/assets/angular/Modules/app.js"></script>
+    <script src="~/Areas/admincp/assets/angular/Controllers/QLSanphamCtrl.js"></script>
+    <script src="~/Areas/admincp/assets/angular/Services/CrudService.js"></script>
+}
+

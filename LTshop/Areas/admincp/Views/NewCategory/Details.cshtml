@@ -1,0 +1,27 @@
+﻿@model BTH4.Models.loaitin
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/admincp/Views/Shared/_LayoutAdministracao.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>loaitin</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tenloai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tenloai)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.maloaitin }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

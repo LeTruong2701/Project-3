@@ -1,0 +1,147 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div ng-app="myapp">
+    <h2>Dữ liệu khách hàng</h2>
+
+    <div ng-controller="KhachhangCtrl">
+        <br />
+        <div style="display:flex">
+            <button class="btn btn-primary fa fa-plus" data-toggle="modal" data-target="#exampleModal">Create new</button>
+            <div style="margin-left:800px;font-size:medium">
+                Tìm kiếm:   <input type="text" ng-model="searchText" />
+            </div>
+        </div>
+        <br />
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Khách hàng</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form novalidate name="frmKhachhang" id="frmKhachhang" class="form-horizontal row-border">
+                        <div class="modal-body">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="input17"> Mã KH</label>
+                                    <div class="col-md-7"> <input type="text" id="idmakh" class="form-control" name="namemakh" ng-model="makh" /> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="input17"> Tên KH</label>
+                                    <div class="col-md-7"> <input type="text" id="idtenkh" class="form-control" name="nametenkh" ng-model="tenkh" /> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="input17"> Giới tính</label>
+                                    <div class="col-md-7"> <input type="text" id="idgioitinh" class="form-control" name="namegioitinh" ng-model="gioitinh" /> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="input17"> Năm sinh</label>
+                                    <div class="col-md-7"> <input type="text" id="idnamsinh" class="form-control" name="namenamsinh" ng-model="namsinh" /> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="input17"> Địa chỉ</label>
+                                    <div class="col-md-7"> <input type="text" id="iddiachi" class="form-control" name="namediachi" ng-model="diachi" /> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="input17"> SĐT</label>
+                                    <div class="col-md-7"> <input type="text" id="idsdt" class="form-control" name="namesdt" ng-model="sdt" /> </div>
+                                </div><div class="form-group">
+                                    <label class="col-md-4 control-label" for="input17"> Email</label>
+                                    <div class="col-md-7"> <input type="text" id="idemail" class="form-control" name="nameemail" ng-model="email" /> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="input17"> Created_at</label>
+                                    <div class="col-md-7"> <input type="date" id="idcreated_at" class="form-control" name="namecreated_at" ng-model="created_at" /> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="input17"> Updated_at</label>
+                                    <div class="col-md-7"> <input type="date" id="idupdated_at" class="form-control" name="nameupdated_at" ng-model="updated_at" /> </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-4"> </div>
+                                    <div class="col-md-7">
+                                        <span id="save" class="btn btn-success margin-right-btn" ng-click="SaveUpdate()">
+                                            <i class="icon-save"></i> {{btnText}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+        <table class="table table-bordered  table-striped">
+            <thead class="grid-top-panel">
+                <tr>
+                    <th style="display:none">makh</th>
+                    <th>Tên KH</th>
+                    <th>SDT</th>
+                    <th>Địa chỉ</th>
+                    <th>Email</th>
+                    <th>Mật Khẩu</th>
+                    <th>Created_at</th>
+                    <th>Updated_at</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="dataModel in khachhangs | orderBy:sortColumn:reverse | filter: searchText">
+                    <td style="display:none">{{dataModel.makh}}</td>
+                    <td> {{dataModel.tenkh}}</td>
+                    <td> {{dataModel.gioitinh}}</td>
+                    <td> {{dateObj(dataModel.namsinh)| date: 'dd/MM/yyyy'}}</td>
+                    <td> {{dataModel.diachi}}</td>
+                    <td> {{dataModel.sdt}}</td>
+                    <td> {{dataModel.email}}</td>
+                    <td>{{dateObj(dataModel.created_at)| date: 'dd/MM/yyyy'}}</td>
+                    <td>{{dateObj(dataModel.updated_at)| date: 'dd/MM/yyyy'}}</td>
+                    <td style="text-align:right; color:white">
+                        <span>
+                            <span id="save" class="btn btn-primary margin-right-btn" ng-click="GetStudentByID(dataModel)" data-toggle="modal" data-target="#exampleModal">
+
+                                Edit
+                            </span>
+                        </span>
+                    </td>
+                    <td style="text-align:right; color:white">
+                        <span>
+                            <span id="save" class="btn btn-danger margin-right-btn" ng-click="DeleteKhachhang(dataModel)">
+                                Delete
+                            </span>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot></tfoot>
+        </table>
+    </div>
+
+
+
+
+   
+
+</div>
+
+@section PageInlineScripts
+{
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Areas/admincp/assets/angular/Modules/app.js"></script>
+    <script src="~/Areas/admincp/assets/angular/Controllers/KhachhangCtrl.js"></script>
+    <script src="~/Areas/admincp/assets/angular/Services/CrudService.js"></script>
+}
+
+

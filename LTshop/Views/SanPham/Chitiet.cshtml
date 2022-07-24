@@ -1,0 +1,444 @@
+﻿
+@{
+    ViewBag.Title = "Chitiet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript" src="~/Scripts/angularScript/chitiet.js"></script>
+<div ng-controller="ChiTietCtrl">
+    <div ng-init="LoadSPMoi()"></div>
+    <div ng-init="LoadDanhSach()"></div>
+    <input type="hidden" id="MaLoai" value="@ViewBag.maloaisp">
+
+    <div ng-init="LoadSP(@ViewBag.MaSP)"></div>
+    <!-- Begin Hiraola's Breadcrumb Area -->
+    <div class="breadcrumb-area">
+        <div class="container">
+            <div class="breadcrumb-content">
+                <h2>Single Product Type</h2>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active">Single Product</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Hiraola's Breadcrumb Area End Here -->
+    <!-- Begin Hiraola's Single Product Area -->
+    <div class="sp-area">
+        <div class="container">
+            <div class="sp-nav">
+                <div class="row">
+                    <div class="col-lg-5 col-md-5">
+                        <div class="sp-img_area">
+                            <div class="zoompro-border">
+                                <img class="zoompro" src="{{SanPham.anh}}" data-zoom-image="{{SanPham.anh}}" alt="Hiraola's Product Image" />
+                            </div>
+                            @*<div id="gallery" class="sp-img_slider">
+                                    <a class="active" data-image="~/assets/images/single-product/large-size/1.jpg" data-zoom-image="~/assets/images/single-product/large-size/1.jpg">
+                                        <img src="~/Content/assets/images/single-product/small-size/1.jpg" alt="Hiraola's Product Image">
+                                    </a>
+                                    <a data-image="~/assets/images/single-product/large-size/2.jpg" data-zoom-image="~/assets/images/single-product/large-size/2.jpg">
+                                        <img src="~/assets/images/single-product/small-size/2.jpg" alt="Hiraola's Product Image">
+                                    </a>
+                                    <a data-image="~/assets/images/single-product/large-size/3.jpg" data-zoom-image="~/assets/images/single-product/large-size/3.jpg">
+                                        <img src="~/assets/images/single-product/small-size/3.jpg" alt="Hiraola's Product Image">
+                                    </a>
+                                    <a data-image="~/assets/images/single-product/large-size/4.jpg" data-zoom-image="~/assets/images/single-product/large-size/4.jpg">
+                                        <img src="~/assets/images/single-product/small-size/4.jpg" alt="Hiraola's Product Image">
+                                    </a>
+                                    <a data-image="~/assets/images/single-product/large-size/5.jpg" data-zoom-image="~/assets/images/single-product/large-size/5.jpg">
+                                        <img src="~/assets/images/single-product/small-size/5.jpg" alt="Hiraola's Product Image">
+                                    </a>
+                                    <a data-image="~/assets/images/single-product/large-size/6.jpg" data-zoom-image="~/assets/images/single-product/large-size/6.jpg">
+                                        <img src="~/assets/images/single-product/small-size/6.jpg" alt="Hiraola's Product Image">
+                                    </a>
+                                </div>*@
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-md-7">
+                        <div class="sp-content">
+                            <div class="sp-heading">
+                                <h5><a href="#">{{SanPham.tensp}}</a></h5>
+                            </div>
+                            @*<div>{{SanPham.giaban}}</div>*@
+                        <span class="reference" style="color:red;font-weight:bold;font-size:large">{{SanPham.giaban | currency :"":0}} VNĐ</span>
+                            <div class="rating-box">
+
+
+                                <ul>
+                                    <li><i class="fa fa-star-of-david"></i></li>
+                                    <li><i class="fa fa-star-of-david"></i></li>
+                                    <li><i class="fa fa-star-of-david"></i></li>
+                                    <li><i class="fa fa-star-of-david"></i></li>
+                                    <li class="silver-color"><i class="fa fa-star-of-david"></i></li>
+                                </ul>
+                            </div>
+                            <div class="sp-essential_stuff">
+
+                                <p>{{SanPham.dacdiem}}</p>
+                                @*<ul>
+                                        <li>EX Tax: <a href="javascript:void(0)"><span>£453.35</span></a></li>
+                                        <li>Brands <a href="javascript:void(0)">Buxton</a></li>
+                                        <li>Product Code: <a href="javascript:void(0)">Product 16</a></li>
+                                        <li>Reward Points: <a href="javascript:void(0)">600</a></li>
+                                        <li>Availability: <a href="javascript:void(0)">In Stock</a></li>
+                                    </ul>*@
+                            </div>
+                            <div class="product-size_box">
+                                <span>Size</span>
+                                <select class="myniceselect custom-select"
+                                        ng-model="size"
+                                        ng-change="changeSize(size)">
+                                    <option value="S" selected>S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                </select>
+                            </div>
+                            <div class="quantity">
+                                <label>Quantity</label>
+                                <div class="cart-plus-minus">
+                                    <input class="cart-plus-minus-box" value="1" type="text">
+                                    <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
+                                    <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
+                                </div>
+                            </div>
+                            <div class="qty-btn_area">
+                                <ul>
+                                    <li><a class="qty-cart_btn" ng-click="addToCart(SanPham)">Add To Cart</a></li>
+                                    <li><a class="qty-wishlist_btn" href="wishlist.html" data-toggle="tooltip" title="Add To Wishlist"><i class="ion-android-favorite-outline"></i></a></li>
+                                    <li><a class="qty-compare_btn" href="compare.html" data-toggle="tooltip" title="Compare This Product"><i class="ion-ios-shuffle-strong"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="hiraola-tag-line">
+                                <h6>Tags:</h6>
+                                <a href="javascript:void(0)">Ring</a>,
+                                <a href="javascript:void(0)">Necklaces</a>,
+                                <a href="javascript:void(0)">Braid</a>
+                            </div>
+                            <div class="hiraola-social_link">
+                                <ul>
+                                    <li class="facebook">
+                                        <a href="https://www.facebook.com/" data-toggle="tooltip" target="_blank" title="Facebook">
+                                            <i class="fab fa-facebook"></i>
+                                        </a>
+                                    </li>
+                                    <li class="twitter">
+                                        <a href="https://twitter.com/" data-toggle="tooltip" target="_blank" title="Twitter">
+                                            <i class="fab fa-twitter-square"></i>
+                                        </a>
+                                    </li>
+                                    <li class="youtube">
+                                        <a href="https://www.youtube.com/" data-toggle="tooltip" target="_blank" title="Youtube">
+                                            <i class="fab fa-youtube"></i>
+                                        </a>
+                                    </li>
+                                    <li class="google-plus">
+                                        <a href="https://www.plus.google.com/discover" data-toggle="tooltip" target="_blank" title="Google Plus">
+                                            <i class="fab fa-google-plus"></i>
+                                        </a>
+                                    </li>
+                                    <li class="instagram">
+                                        <a href="https://rss.com/" data-toggle="tooltip" target="_blank" title="Instagram">
+                                            <i class="fab fa-instagram"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hiraola's Single Product Area End Here -->
+    <!-- Begin Hiraola's Single Product Tab Area -->
+    <div class="hiraola-product-tab_area-2 sp-product-tab_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="sp-product-tab_nav ">
+                        <div class="product-tab">
+                            <ul class="nav product-menu">
+                                <li>
+                                    <a class="active" data-toggle="tab" href="#description"><span>Chi tiết</span></a>
+                                </li>
+                                <li><a data-toggle="tab" href="#specification"><span>Lưu ý</span></a></li>
+                                <li><a data-toggle="tab" href="#reviews"><span>Reviews (1)</span></a></li>
+                            </ul>
+                        </div>
+                        <div class="tab-content hiraola-tab_content">
+                            <div id="description" class="tab-pane active show" role="tabpanel">
+                                <div class="product-description">
+                                    <ul>
+                                        <li>
+                                            <strong>Chi tiết sản phẩm</strong>
+                                            <span>
+                                                {{SanPham.dacdiem}}
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <strong>Bảo quản</strong>
+                                            <ul>
+                                                <li>Sử dụng nước dưới 35 độ để giặt sản phẩm</li>
+                                                <li>Không sử dụng thuốc tẩy hoặc bột giặt có độ tẩy cao</li>
+                                                <li>Tránh phơi dưới ánh nắng trực tiếp để bảo quản màu sắc</li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <strong>Liên hệ</strong>
+                                            <span>
+                                                Hotline:(+84) 379 517 036 <br />
+                                                Địa chỉ: Khoái Châu Hưng Yên<br />
+                                                Email:levantruong2701@gmail.com
+                                            </span>
+                                        </li>
+
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <div id="specification" class="tab-pane" role="tabpanel">
+                                <table class="table table-bordered specification-inner_stuff">
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="2"><strong>Memory</strong></td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody>
+                                        <tr>
+                                            <td>test 1</td>
+                                            <td>8gb</td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="2"><strong>Processor</strong></td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody>
+                                        <tr>
+                                            <td>No. of Cores</td>
+                                            <td>1</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="reviews" class="tab-pane" role="tabpanel">
+                                <div class="tab-pane active" id="tab-review">
+                                    <form class="form-horizontal" id="form-review">
+                                        <div id="review">
+                                            <table class="table table-striped table-bordered">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width: 50%;"><strong>Customer</strong></td>
+                                                        <td class="text-right">25/04/2019</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2">
+                                                            <p>Good product! Thank you very much</p>
+                                                            <div class="rating-box">
+                                                                <ul>
+                                                                    <li><i class="fa fa-star-of-david"></i></li>
+                                                                    <li><i class="fa fa-star-of-david"></i></li>
+                                                                    <li><i class="fa fa-star-of-david"></i></li>
+                                                                    <li><i class="fa fa-star-of-david"></i></li>
+                                                                    <li><i class="fa fa-star-of-david"></i></li>
+                                                                </ul>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <h2>Write a review</h2>
+                                        <div class="form-group required">
+                                            <div class="col-sm-12 p-0">
+                                                <label>Your Email <span class="required">*</span></label>
+                                                <input class="review-input" type="email" name="con_email" id="con_email" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group required second-child">
+                                            <div class="col-sm-12 p-0">
+                                                <label class="control-label">Share your opinion</label>
+                                                <textarea class="review-textarea" name="con_message" id="con_message"></textarea>
+                                                <div class="help-block">
+                                                    <span class="text-danger">Note:</span> HTML is not
+                                                    translated!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group last-child required">
+                                            <div class="col-sm-12 p-0">
+                                                <div class="your-opinion">
+                                                    <label>Your Rating</label>
+                                                    <span>
+                                                        <select class="star-rating">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                        </select>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="hiraola-btn-ps_right">
+                                                <a href="javascript:void(0)" class="hiraola-btn hiraola-btn_dark">Continue</a>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hiraola's Single Product Tab Area End Here -->
+    <!-- Begin Hiraola's Product Area Two -->
+    <div class="hiraola-product_area hiraola-product_area-2 ">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="hiraola-section_title">
+                        <h4>Sản phẩm mới</h4>
+                    </div>
+
+                </div>
+                <div class="col-lg-12">
+                    <div class="hiraola-product_slider-3">
+
+                        <!-- Begin Hiraola's Slide Item Area -->
+                        <div ng-repeat="item in listSPMoi" class="slide-item">
+                            <div class="single_product">
+                                <div class="product-img">
+                                    <a href="/SanPham/Chitiet/?MaSP={{item.masp}}">
+                                        <img class="primary-img" src="{{item.anh}}" alt="Hiraola's Product Image">
+                                        <img class="secondary-img" src="{{item.anh}}" alt="Hiraola's Product Image">
+                                    </a>
+                                    <span class="sticker">New</span>
+                                    <div class="add-actions">
+                                        <ul>
+                                            <li><a class="hiraola-add_cart" ng-click="addToCart(item)" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="ion-bag"></i></a></li>
+                                            <li>
+                                                <a class="hiraola-add_compare" href="compare.html" data-toggle="tooltip" data-placement="top" title="Compare This Product">
+                                                    <i class="ion-ios-shuffle-strong"></i>
+                                                </a>
+                                            </li>
+                                            <li class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Quick View"><i class="ion-eye"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="hiraola-product_content">
+                                    <div class="product-desc_info">
+                                        <h6><a class="product-name" href="/SanPham/Chitiet/?MaSP={{item.masp}}">{{item.tensp}}</a></h6>
+                                        <div class="price-box">
+                                            <span class="new-price" style="color:red">{{item.giaban | currency :"":0}}</span>
+                                        </div>
+                                        <div class="additional-add_action">
+                                            <ul>
+                                                <li>
+                                                    <a class="hiraola-add_compare" href="wishlist.html" data-toggle="tooltip" data-placement="top" title="Add To Wishlist">
+                                                        <i class="ion-android-favorite-outline"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="rating-box">
+                                            <ul>
+                                                <li><i class="fa fa-star-of-david"></i></li>
+                                                <li><i class="fa fa-star-of-david"></i></li>
+                                                <li><i class="fa fa-star-of-david"></i></li>
+                                                <li><i class="fa fa-star-of-david"></i></li>
+                                                <li class="silver-color"><i class="fa fa-star-of-david"></i></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Hiraola's Slide Item Area End Here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <!-- Hiraola's Product Area Two End Here -->
+    <!-- Begin Hiraola's Product Area Two -->
+    <!--<div class="hiraola-product_area hiraola-product_area-2 section-space_add">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="hiraola-section_title">
+                        <h4>Các sản phẩm cùng loại</h4>
+                    </div>
+
+                </div>
+                <div class="col-lg-12">
+                    <div class="hiraola-product_slider-3">-->
+    <!-- Begin Hiraola's Slide Item Area -->
+    <!--<div ng-repeat="item in listSPCL" class="slide-item">
+        <div class="single_product">
+            <div class="product-img">
+                <a href="/SanPham/Chitiet/?MaSP={{item.masp}}">
+                    <img class="primary-img" src="{{item.anh}}" alt="Hiraola's Product Image">
+                    <img class="secondary-img" src="{{item.anh}}" alt="Hiraola's Product Image">
+                </a>
+                <span class="sticker-2">Sale</span>
+                <div class="add-actions">
+                    <ul>
+                        <li><a class="hiraola-add_cart" ng-click="addToCart(item)" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="ion-bag"></i></a></li>
+                        <li>
+                            <a class="hiraola-add_compare" href="compare.html" data-toggle="tooltip" data-placement="top" title="Compare This Product">
+                                <i class="ion-ios-shuffle-strong"></i>
+                            </a>
+                        </li>
+                        <li class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Quick View"><i class="ion-eye"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="hiraola-product_content">
+                <div class="product-desc_info">
+                    <h6><a class="product-name" href="/SanPham/Chitiet/?MaSP={{item.masp}}">{{item.tensp}}</a></h6>
+                    <div class="price-box">
+                        <span class="new-price">{{item.giaban | currency}}</span>
+                    </div>
+                    <div class="additional-add_action">
+                        <ul>
+                            <li>
+                                <a class="hiraola-add_compare" href="wishlist.html" data-toggle="tooltip" data-placement="top" title="Add To Wishlist">
+                                    <i class="ion-android-favorite-outline"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="rating-box">
+                        <ul>
+                            <li><i class="fa fa-star-of-david"></i></li>
+                            <li><i class="fa fa-star-of-david"></i></li>
+                            <li><i class="fa fa-star-of-david"></i></li>
+                            <li><i class="fa fa-star-of-david"></i></li>
+                            <li class="silver-color"><i class="fa fa-star-of-david"></i></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>-->
+    <!-- Hiraola's Slide Item Area End Here -->
+    <!--</div>
+                </div>
+            </div>
+        </div>
+    </div>-->
+    <!-- Hiraola's Product Area Two End Here -->
+
+</div>
